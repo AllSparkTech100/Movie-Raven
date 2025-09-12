@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Box, IconButton, Grid, Card, CardMedia, CardContent, Typography, Rating, CircularProgress } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { fetchUpcomingMovies, fetchTVShows } from '../API/tmdb';
 
 function MovieCard({ movie }) {
@@ -153,10 +151,10 @@ function UpcomingTabs() {
           <Tab label="Anime" />
         </Tabs>
         <IconButton sx={{ color: '#fff', ml: 1 }} onClick={handlePrev} disabled={value === 0}>
-          <ArrowBackIosNewIcon />
+          {/* <ArrowBackIosNewIcon /> */}
         </IconButton>
         <IconButton sx={{ color: '#fff', ml: 1 }} onClick={handleNext} disabled={value === 2}>
-          <ArrowForwardIosIcon />
+          {/* <ArrowForwardIosIcon /> */}
         </IconButton>
       </Box>
 
@@ -175,7 +173,7 @@ function UpcomingTabs() {
       ) : (
         <Grid container spacing={3}>
           {currentContent.map((item) => (
-            <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={item.id} xs={12} md={4} lg={3}>
               <MovieCard movie={item} />
             </Grid>
           ))}
