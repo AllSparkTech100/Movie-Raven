@@ -1,0 +1,1 @@
+export { default as shotman } from './shotman.jpg';
