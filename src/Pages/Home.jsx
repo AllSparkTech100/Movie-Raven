@@ -1,6 +1,7 @@
 import React from 'react';
 import { clownImg, shotman } from '../assets/Images';
 import { FaCalendarAlt } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa6";
 import { MdOutlineAccessTime } from "react-icons/md";
 import Upcoming from '../Components/Upcoming';
 import ServicesSection from '../Components/ServicesSection';
@@ -48,8 +49,8 @@ function Home() {
                 128 min
               </span>
             </div>
-            <button className="mt-2 px-8 py-3 rounded-full border-2 border-[#E6C800] text-white font-bold text-lg flex items-center gap-2 hover:bg-[#E6C800] hover:text-[#181B20] lg:cursor-pointer transition">
-              <svg className="w-5 h-5" fill="none" stroke="#E6C800" strokeWidth="2" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="#E6C800" /></svg>
+            <button className="mt-2 px-8 py-3 rounded-full border-2 border-[#E6C800] text-white font-bold text-lg flex items-center gap-2 hover:bg-[#E6C800] hover:text-[#181B20] lg:hover:border-0 lg:cursor-pointer transition">
+              <FaPlay size={20}/>
               WATCH NOW
             </button>
           </div>
@@ -98,10 +99,7 @@ function Home() {
               alt="Friends watching TV"
               className="w-full max-w-xl rounded-xl object-cover"
             />
-            <button className="absolute bottom-8 right-8 bg-[#E6C800] text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 8v8m0 0l-4-4m4 4l4-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-          </div>
+         </div>
         </div>
       </section>
       {/* World Best TV Series Section */}
