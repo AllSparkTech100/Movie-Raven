@@ -1,59 +1,29 @@
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Box, IconButton, Grid, Card, CardMedia, CardContent, Typography, Rating, CircularProgress } from '@mui/material';
-import { fetchUpcomingMovies, fetchTVShows } from '../API/tmdb';
+// import { fetchUpcomingMovies, fetchTVShows } from '../API/tmdb';
 
 function MovieCard({ movie }) {
   return (
-    <Card sx={{ 
-      background: 'rgba(24,27,32,0.7)',
-      borderRadius: '16px',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      transition: 'transform 0.2s',
-      '&:hover': {
-        transform: 'scale(1.03)',
-      }
-    }}>
-      <CardMedia
-        component="img"
-        height="300"
-        image={movie.posterPath}
+    <div className="bg-[rgba(24,27,32,0.7)] rounded-2xl h-full flex flex-col transform transition-transform duration-200 hover:scale-105 hover:cursor-pointer">
+      <img
+        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-2xl"
+        src={movie.posterPath}
         alt={movie.title}
-        sx={{ objectFit: 'cover' }}
       />
-      <CardContent sx={{ flexGrow: 1, color: '#fff' }}>
-        <Box sx={{ display: 'flex', gap: 1, mb: 1, flexWrap: 'wrap' }}>
-          <Typography
-            variant="caption"
-            sx={{
-              bgcolor: '#E6C800',
-              color: '#181B20',
-              px: 1,
-              py: 0.5,
-              borderRadius: '4px',
-              fontWeight: 'bold',
-            }}
-          >
+      <div className="flex-grow p-4 text-white">
+        <div className="flex flex-wrap gap-2 mb-2">
+          <span className="bg-[#E6C800] text-[#181B20] px-2 py-1 rounded text-xs font-bold">
             {movie.quality}
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              bgcolor: 'rgba(255,255,255,0.1)',
-              color: '#fff',
-              px: 1,
-              py: 0.5,
-              borderRadius: '4px',
-            }}
-          >
+          </span>
+          <span className="bg-white/10 text-white px-2 py-1 rounded text-xs">
             {movie.duration}
-          </Typography>
-        </Box>
-        <Typography variant="h6" component="div" sx={{ mb: 1, fontWeight: 'bold' }}>
+          </span>
+        </div>
+        <h3 className="text-base sm:text-lg font-bold mb-2 line-clamp-2">
           {movie.title}
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+        </h3>
+        <div className="flex items-center gap-2 mb-2">
           <Rating
             value={movie.rating / 2}
             precision={0.5}
@@ -65,15 +35,15 @@ function MovieCard({ movie }) {
               },
             }}
           />
-          <Typography variant="body2" color="rgba(255,255,255,0.7)">
+          <span className="text-xs text-white/70">
             ({movie.reviews} reviews)
-          </Typography>
-        </Box>
-        <Typography variant="body2" color="rgba(255,255,255,0.7)">
+          </span>
+        </div>
+        <p className="text-xs text-white/70">
           Year: {movie.year}
-        </Typography>
-      </CardContent>
-    </Card>
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -118,7 +88,7 @@ function UpcomingTabs() {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 4 }}>
+      <div className="flex flex-wrap items-center gap-4 mt-2 mb-6">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -129,13 +99,13 @@ function UpcomingTabs() {
             '.MuiTab-root': {
               color: '#fff',
               borderRadius: '16px',
-              px: 3,
+              px: { xs: 2, sm: 3 },
               py: 1,
-              minWidth: 100,
+              minWidth: { xs: 80, sm: 100 },
               fontWeight: 500,
-              fontSize: '1rem',
+              fontSize: { xs: '0.875rem', sm: '1rem' },
               background: 'rgba(24,27,32,0.7)',
-              marginRight: 2,
+              marginRight: { xs: 1, sm: 2 },
               border: 'none',
               transition: 'all 0.2s',
             },
@@ -146,17 +116,33 @@ function UpcomingTabs() {
             },
           }}
         >
+         <Tab label="Movies" />
           <Tab label="TV Shows" />
-          <Tab label="Movies" />
           <Tab label="Anime" />
         </Tabs>
-        <IconButton sx={{ color: '#fff', ml: 1 }} onClick={handlePrev} disabled={value === 0}>
-          {/* <ArrowBackIosNewIcon /> */}
-        </IconButton>
-        <IconButton sx={{ color: '#fff', ml: 1 }} onClick={handleNext} disabled={value === 2}>
-          {/* <ArrowForwardIosIcon /> */}
-        </IconButton>
-      </Box>
+        <div className="flex items-center gap-2">
+          <IconButton 
+            sx={{ 
+              color: '#fff',
+              padding: { xs: '4px', sm: '8px' }
+            }} 
+            onClick={handlePrev} 
+            disabled={value === 0}
+          >
+            {/* <ArrowBackIosNewIcon /> */}
+          </IconButton>
+          <IconButton 
+            sx={{ 
+              color: '#fff',
+              padding: { xs: '4px', sm: '8px' }
+            }} 
+            onClick={handleNext} 
+            disabled={value === 2}
+          >
+            {/* <ArrowForwardIosIcon /> */}
+          </IconButton>
+        </div>
+      </div>
 
       {loading ? (
         <Box display="flex" justifyContent="center" p={4}>
@@ -171,13 +157,13 @@ function UpcomingTabs() {
           No content available at the moment.
         </Box>
       ) : (
-        <Grid container spacing={3}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-2">
           {currentContent.map((item) => (
-            <Grid item key={item.id} xs={12} md={4} lg={3}>
+            <div key={item.id} className="w-full">
               <MovieCard movie={item} />
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </div>
       )}
     </Box>
   );
@@ -186,12 +172,14 @@ function UpcomingTabs() {
 function Upcoming() {
   return (
     <>
-      <section className="px-4 py-4">
-        <h3 className="uppercase text-yellow-500">
+      <section className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <h3 className="uppercase text-yellow-500 text-sm sm:text-base font-medium tracking-wide">
           online streaming
         </h3>
-        <div className='flex flex-col' style={{ marginTop: '2rem' }}>
-          <h2 style={{ color: '#fff', fontWeight: 700, fontSize: '2rem', marginBottom: '1rem' }}>Upcoming Movies</h2>
+        <div className="mt-6 sm:mt-8">
+          <h2 className="text-white font-bold text-xl sm:text-2xl lg:text-3xl mb-4 sm:mb-6">
+            Upcoming Movies
+          </h2>
           <UpcomingTabs />
         </div>
       </section>
